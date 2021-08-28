@@ -1,0 +1,58 @@
+/////-----------------------DAY 2 THA----PRACTICE SQL AND FOREIGN KEYS------------------------------------------///////
+
+
+Microsoft Windows [Version 10.0.18363.1500]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+/***((((( EVERY THING IS CASE insensitive )))))****/
+
+C:\Users\mc>psql -U postgres
+Password for user postgres:
+psql (13.4)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+ /* Create a new user and assign password to it */
+postgres=# CREATE USER devsnest WITH PASSWORD 'devsnest';
+CREATE ROLE
+
+/* Create a new database, think database as drives (C:, D:) on system */
+postgres=# CREATE DATABASE devs;
+CREATE DATABASE
+
+ /* Gives permissions to devsnest for devs */
+postgres=# GRANT ALL PRIVILEGES ON DATABASE devs to devsnest;
+GRANT
+
+ /* Deletes the database */
+postgres=# DROP DATABASE IF EXISTS devs;
+DROP DATABASE
+
+postgres=# CREATE DATABASE devs;
+CREATE DATABASE
+
+/* lists all databases */
+postgres=# \l
+                                                 List of databases
+   Name    |  Owner   | Encoding |          Collate           |           Ctype            |   Access privileges
+-----------+----------+----------+----------------------------+----------------------------+-----------------------
+ devs        | postgres | UTF8     | English_United States.1252 | English_United States.1252 |
+ devsdb    | postgres | UTF8     | English_United States.1252 | English_United States.1252 |
+ postgres  | postgres | UTF8     | English_United States.1252 | English_United States.1252 |
+ template0 | postgres | UTF8     | English_United States.1252 | English_United States.1252 | =c/postgres          +
+           |          |          |                            |                            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | English_United States.1252 | English_United States.1252 | =c/postgres          +
+           |          |          |                            |                            | postgres=CTc/postgres
+(5 rows)
+
+/* connects to database */
+postgres=# \c devs
+You are now connected to database "devs" as user "postgres".
+
+
+/////-------------------------------------------------TABLES-------------------------------------------////
+
+
+
