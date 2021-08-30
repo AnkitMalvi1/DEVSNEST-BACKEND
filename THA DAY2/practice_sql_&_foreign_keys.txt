@@ -150,3 +150,180 @@ postgres=# SELECT * FROM COMPANY WHERE AGE >= 25 AND SALARY >= 65000;
   5 | David |  27 | Texas                                              |  85000 | 2007-12-13
 (2 rows)
 
+postgres=# SELECT * FROM COMPANY WHERE AGE >= 25 OR SALARY >= 65000;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(4 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE AGE IS NOT NULL;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+  3 | Teddy |  23 | Norway                                             |  20000 |
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(5 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE NAME LIKE 'Pa%';
+ id | name | age | address | salary | join_date
+----+------+-----+---------+--------+-----------
+(0 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE NAME LIKE 'Pau_';
+ id | name | age | address | salary | join_date
+----+------+-----+---------+--------+-----------
+(0 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE SALARY::text LIKE '200%';
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  3 | Teddy |  23 | Norway                                             |  20000 |
+(2 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE ADDRESS  LIKE '%-%';
+ id | name | age |                      address                       | salary | join_date
+----+------+-----+----------------------------------------------------+--------+------------
+  4 | Mark |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+(1 row)
+
+
+postgres=# SELECT * FROM COMPANY WHERE AGE IN ( 25, 27 );
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(3 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE AGE NOT IN ( 25, 27 );
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  3 | Teddy |  23 | Norway                                             |  20000 |
+(2 rows)
+
+
+postgres=# SELECT * FROM COMPANY WHERE AGE BETWEEN 25 AND 27;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(3 rows)
+
+
+postgres=# SELECT AGE FROM COMPANY
+postgres-#         WHERE EXISTS (SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+ age
+-----
+  32
+  25
+  23
+  25
+  27
+(5 rows)
+
+
+postgres=# SELECT * FROM COMPANY
+postgres-#         WHERE AGE > (SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+ id | name | age |                      address                       | salary | join_date
+----+------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+(1 row)
+
+
+postgres=# SELECT * FROM COMPANY LIMIT 4;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+  3 | Teddy |  23 | Norway                                             |  20000 |
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+(4 rows)
+
+
+postgres=# SELECT * FROM COMPANY LIMIT 3 OFFSET 2;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  3 | Teddy |  23 | Norway                                             |  20000 |
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(3 rows)
+
+
+postgres=# SELECT * FROM COMPANY ORDER BY NAME DESC;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  3 | Teddy |  23 | Norway                                             |  20000 |
+  1 | PAUL  |  32 | CALIFORNIA                                         |  20000 | 2021-08-29
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+  2 | Allen |  25 | Texas                                              |        | 2007-08-29
+(5 rows)
+
+postgres=# UPDATE COMPANY SET SALARY = 15000 WHERE ID = 3;
+UPDATE 1
+postgres=# UPDATE COMPANY SET ADDRESS = 'Texas', SALARY=20000;
+UPDATE 5
+postgres=# DELETE FROM COMPANY WHERE ID = 2;
+DELETE 1
+
+
+//////-----------------------------------------FOREIGN KEYS-------------------------------------------/////
+
+
+postgres=# DROP TABLE IF EXISTS customers;
+NOTICE:  table "customers" does not exist, skipping
+DROP TABLE
+
+postgres=# DROP TABLE IF EXISTS contacts;
+NOTICE:  table "contacts" does not exist, skipping
+DROP TABLE
+
+postgres=# CREATE TABLE customers(
+postgres(# customer_id INT GENERATED ALWAYS AS IDENTITY,
+postgres(# customer_name VARCHAR(255) NOT NULL,
+postgres(# PRIMARY KEY(customer_id)
+postgres(# );
+CREATE TABLE
+
+postgres=# CREATE TABLE contacts(
+postgres(#    contact_id INT GENERATED ALWAYS AS IDENTITY,
+postgres(#    customer_id INT,
+postgres(#    contact_name VARCHAR(255) NOT NULL,
+postgres(#    phone VARCHAR(15),
+postgres(#    email VARCHAR(100),
+postgres(#    PRIMARY KEY(contact_id),
+postgres(#    CONSTRAINT fk_customer
+postgres(#       FOREIGN KEY(customer_id)
+postgres(#   REFERENCES customers(customer_id)
+postgres(# );
+CREATE TABLE
+
+postgres=# INSERT INTO customers(customer_name)
+postgres-# VALUES('BlueBird Inc'),
+postgres-#       ('Dolphin LLC');
+INSERT 0 2
+
+postgres=# INSERT INTO contacts(customer_id, contact_name, phone, email)
+postgres-# VALUES(1,'John Doe','(408)-111-1234','john.doe@bluebird.dev'),
+postgres-#       (1,'Jane Doe','(408)-111-1235','jane.doe@bluebird.dev'),
+postgres-#       (2,'David Wright','(408)-222-1234','david.wright@dolphin.dev');
+INSERT 0 3
+
+postgres=# DELETE FROM customers
+postgres-# WHERE customer_id = 1;
+ERROR:  update or delete on table "customers" violates foreign key constraint "fk_customer" on table "contacts"
+DETAIL:  Key (customer_id)=(1) is still referenced from table "contacts".
