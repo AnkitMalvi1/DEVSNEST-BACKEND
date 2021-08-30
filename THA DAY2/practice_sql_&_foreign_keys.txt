@@ -56,3 +56,97 @@ You are now connected to database "devs" as user "postgres".
 
 
 
+postgres=# CREATE TABLE COMPANY(
+postgres(# ID INT PRIMARY KEY NOT NULL,
+postgres(# NAME TEXT NOT NULL,
+postgres(# AGE INT NOT NULL,
+postgres(# ADDRESS CHAR(50),
+postgres(# SALARY REAL
+postgres(# );
+CREATE TABLE
+
+postgres=# CREATE TABLE DEPARTMENT(
+postgres(# ID INT PRIMARY KEY NOT NULL,
+postgres(# NAME TEXT NOT NULL,
+postgres(# DEPT CHAR(50) NOT NULL,
+postgres(# EMP_ID INT NOT NULL
+postgres(# );
+CREATE TABLE
+
+postgres=# create schema myschema;
+CREATE SCHEMA
+postgres=# create table myschema.company(
+postgres(# ID INT NOT NULL,
+postgres(# NAME VARCHAR(20) NOT NULL,
+postgres(# ADDRESS CHAR(25),
+postgres(# AGE INT NOT NULL,
+postgres(# SALARY DECIMAL(18,2),
+postgres(# PRIMARY KEY (ID)
+postgres(# );
+CREATE TABLE
+postgres=# SELECT * FROM myschema.company;
+ id | name | address | age | salary
+----+------+---------+-----+--------
+(0 rows)
+
+//////---------------------------------------Think of schema like folders----------------------------------------------////////
+
+postgres=# DROP SCHEMA myschema;
+ERROR:  cannot drop schema myschema because other objects depend on it
+DETAIL:  table myschema.company depends on schema myschema
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+
+postgres=# DROP SCHEMA myschema CASCADE;
+NOTICE:  drop cascades to table myschema.company
+DROP SCHEMA
+
+postgres=# DROP TABLE IF EXISTS COMPANY;
+DROP TABLE
+
+postgres=# CREATE TABLE COMPANY(
+postgres(#  ID INT PRIMARY KEY     NOT NULL,
+postgres(#    NAME           TEXT    NOT NULL,
+postgres(#    AGE            INT     NOT NULL,
+postgres(#    ADDRESS        CHAR(50),
+postgres(#    SALARY         REAL,
+postgres(#    JOIN_DATE    DATE
+postgres(# );
+CREATE TABLE
+
+postgres=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (1,'PAUL',32,'CALIFORNIA',20000.00,'2021-08-29');
+INSERT 0 1
+postgres=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,JOIN_DATE) VALUES (2, 'Allen', 25, 'Texas', '2007-08-29');
+INSERT 0 1
+postgres=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (3, 'Teddy', 23, 'Norway', 20000.00, DEFAULT );
+INSERT 0 1
+postgres=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00, '2007-12-13' ), (5, 'David', 27, 'Texas', 85000.00, '2007-12-13');
+INSERT 0 2
+postgres=# INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00, '2007-12-13' ), (5, 'David', 27, 'Texas', 85000.00, '2007-12-13');
+
+postgres=# SELECT (15 + 6) AS ADDITION ;
+ addition
+----------
+       21
+(1 row)
+
+
+postgres=# SELECT COUNT(*) AS "RECORDS" FROM COMPANY;
+ RECORDS
+---------
+       5
+(1 row)
+
+
+postgres=# SELECT CURRENT_TIMESTAMP;
+        current_timestamp
+----------------------------------
+ 2021-08-30 14:49:57.980362+05:30
+(1 row)
+
+postgres=# SELECT * FROM COMPANY WHERE AGE >= 25 AND SALARY >= 65000;
+ id | name  | age |                      address                       | salary | join_date
+----+-------+-----+----------------------------------------------------+--------+------------
+  4 | Mark  |  25 | Rich-Mond                                          |  65000 | 2007-12-13
+  5 | David |  27 | Texas                                              |  85000 | 2007-12-13
+(2 rows)
+
