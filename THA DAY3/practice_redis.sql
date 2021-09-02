@@ -30,3 +30,14 @@ Subscriber:
 
 /////////--------------------MULTIPLE SUBCRIPTION ----------------------------///////
 
+PSUBSCRIBE d*                  //---- (SUBCRIBE TO EVERY PUBLISHERS STARTING WITH d) -----///
+UNSUBCRIBE devsnest            //----- UNSUBCRIBE FROM CHANNEL ----------//
+PUNSUBSCRIBE d*
+
+
+/////----------------------------REDIS STREAMS----------------------------/////
+
+XADD <stream_name> <id> <key_value>      //------LIKE DATABASE ROWS----------//
+XADD mystream 10000 name Ankit           //------SAVING Anna STREAM IN mystream AT ID 10000----//
+XADD mystream 10001 name Boy
+XADD mystream 10002 name Cathy
