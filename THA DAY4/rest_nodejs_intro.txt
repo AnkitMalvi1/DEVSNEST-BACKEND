@@ -45,9 +45,9 @@ Representatable State Transfer
 > High Perfomance, can be cached
 
 
-Create    ------->    POST
+Create     ------->   POST
 Read       ------->   GET
-Update   ------->    PUT
+Update     ------->   PUT
 Delete     ------->   DELETE 
 
 
@@ -63,13 +63,3 @@ Delete     ------->   DELETE
 
 > Header
 > JSON
-
-
-
-
-
-
-
-
-
-
