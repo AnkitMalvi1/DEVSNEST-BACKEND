@@ -61,10 +61,10 @@ printSquare(4);
 // Stack ->   < main() < printSquare(4) < square(a) < multiply(a,b)      [ LIFO ]
 
 
-// function foo() {
-//     return foo();
-// }
-// foo();
+function foo() {
+    return foo();
+}
+foo();
 
 // If we Call the Above Code then We will get the Error.. Like This..
 // Range Error: Maximum call stack size exceeded
@@ -74,13 +74,13 @@ printSquare(4);
 // Blocking
 // what happens when things are slow ? 
 
-// var foo = $.getsync('//foo.com');
-// var bar = $.getsync('//bar.com');
-// var qux = $.getsync('//qux.com');
+var foo = $.getsync('//foo.com');
+var bar = $.getsync('//bar.com');
+var qux = $.getsync('//qux.com');
 
-// console.log(foo);
-// console.log(bar);
-// console.log(qux);
+console.log(foo);
+console.log(bar);
+console.log(qux);
 
 
 //------------------------ Event Loop ------------ Loupe -----------------------------//
