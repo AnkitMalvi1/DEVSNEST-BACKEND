@@ -1,0 +1,48 @@
+//----------------- to install jade to view page of HTML --------------------------//
+
+PS C:\Users\mc\Desktop\Devsnest\THA DAY9> npm i -s jade
++ jade@1.11.0
+added 46 packages from 105 contributors and audited 222 packages in 104.4s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 4 vulnerabilities (3 low, 1 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+
+
+//-------------------- npx express-generator ------------------------------------//
+
+PS C:\Users\mc\Desktop\Devsnest\THA DAY9\public\new1> npx express-generator
+npx: installed 10 in 22.883s
+
+  warning: the default view engine will not be jade in future releases
+  warning: use `--view=jade' or `--help' for additional options
+
+
+   create : public\
+   create : public\javascripts\
+   create : public\images\
+   create : public\stylesheets\
+   create : public\stylesheets\style.css
+   create : routes\
+   create : routes\index.js
+   create : routes\users.js
+   create : views\
+   create : views\error.jade
+   create : views\index.jade
+   create : views\layout.jade
+   create : app.js
+   create : package.json
+   create : bin\
+   create : bin\www
+
+   install dependencies:
+     > npm install
+
+   run the app:
+     > SET DEBUG=new1:* & npm start
+
+
+  
