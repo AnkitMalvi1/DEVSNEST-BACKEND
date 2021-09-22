@@ -31,6 +31,13 @@ AWS ---> Cloud Services - Amazon Web Services (AWS) ---> Create an AWS Account
 >forever stopall
 >forever start
 
+>goto file ./bin/www
+>edit this to port 8080 as default
+>forever start ./bin/www
+
+learn more CI/CD with AWS
+
+
 
 -----------------------Steps to deploy on AWS--------------------------
 
@@ -39,9 +46,3 @@ AWS ---> Cloud Services - Amazon Web Services (AWS) ---> Create an AWS Account
 3. install all the git and node commands
 4. load your repository on ec2
 5. host it from there using CI/CD
-
->goto file ./bin/www
->edit this to port 8080 as default
->forever start ./bin/www
-
-learn more CI/CD with AWS
